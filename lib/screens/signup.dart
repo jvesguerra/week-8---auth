@@ -13,11 +13,28 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController firstNameController = TextEditingController();
+    TextEditingController lasttNameController = TextEditingController();
 
     final email = TextField(
       controller: emailController,
       decoration: const InputDecoration(
         hintText: "Email",
+      ),
+    );
+
+    //First name
+    final firstName = TextField(
+      controller: firstNameController,
+      decoration: const InputDecoration(
+        hintText: "First Name",
+      ),
+    );
+    //Last name
+    final lastName = TextField(
+      controller: lasttNameController,
+      decoration: const InputDecoration(
+        hintText: "Last Name",
       ),
     );
 
@@ -33,9 +50,11 @@ class _SignupPageState extends State<SignupPage> {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
         onPressed: () {
-          context
-              .read<AuthProvider>()
-              .signUp(emailController.text, passwordController.text);
+          context.read<AuthProvider>().signUp(
+              emailController.text,
+              passwordController.text,
+              firstNameController.text,
+              lasttNameController.text);
           Navigator.pop(context);
         },
         child: const Text('Sign up', style: TextStyle(color: Colors.white)),
@@ -65,6 +84,8 @@ class _SignupPageState extends State<SignupPage> {
               style: TextStyle(fontSize: 25),
             ),
             email,
+            firstName,
+            lastName,
             password,
             SignupButton,
             backButton

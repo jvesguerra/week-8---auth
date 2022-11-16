@@ -5,17 +5,17 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 
 class FirebaseAuthAPI {
-  // static final FirebaseAuth auth = FirebaseAuth.instance;
-  // static final FirebaseFirestore db = FirebaseFirestore.instance;
-  final db = FakeFirebaseFirestore();
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+  static final FirebaseFirestore db = FirebaseFirestore.instance;
+  // final db = FakeFirebaseFirestore();
 
-  final auth = MockFirebaseAuth(
-      mockUser: MockUser(
-    isAnonymous: false,
-    uid: 'someuid',
-    email: 'charlie@paddyspub.com',
-    displayName: 'Charlie',
-  ));
+  // final auth = MockFirebaseAuth(
+  //     mockUser: MockUser(
+  //   isAnonymous: false,
+  //   uid: 'someuid',
+  //   email: 'charlie@paddyspub.com',
+  //   displayName: 'Charlie',
+  // ));
 
   Stream<User?> getUser() {
     return auth.authStateChanges();
@@ -37,7 +37,8 @@ class FirebaseAuthAPI {
     }
   }
 
-  void signUp(String email, String password) async {
+  void signUp(
+      String email, String password, String firstName, String lastName) async {
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
@@ -45,7 +46,7 @@ class FirebaseAuthAPI {
         password: password,
       );
       if (credential.user != null) {
-        saveUserToFirestore(credential.user?.uid, email);
+        saveUserToFirestore(credential.user?.uid, email, firstName, lastName);
       }
     } on FirebaseAuthException catch (e) {
       //possible to return something more useful
@@ -60,9 +61,13 @@ class FirebaseAuthAPI {
     }
   }
 
-  void saveUserToFirestore(String? uid, String email) async {
+  void saveUserToFirestore(
+      String? uid, String email, String firstName, lastName) async {
     try {
-      await db.collection("users").doc(uid).set({"email": email});
+      await db
+          .collection("users")
+          .doc(uid)
+          .set({"email": email, "firstName": firstName, "lastName": lastName});
     } on FirebaseException catch (e) {
       print(e.message);
     }
