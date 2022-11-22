@@ -28,10 +28,9 @@ class AuthProvider with ChangeNotifier {
     authService.signIn(email, password);
   }
 
-  // String signIn(String email, String password, String _error) {
-  //   authService.signIn(email, password, _error);
-  //   print(_error);
-  //   return _error;
+  // Future<String> signIn(String email, String password) async {
+  //   String message = await authService.signIn(email, password);
+  //   return message;
   // }
 
   void signOut() {

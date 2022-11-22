@@ -3,11 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
+import 'package:flutter/material.dart';
 import 'package:week7_networking_discussion/screens/login.dart';
 
 class FirebaseAuthAPI {
   static final FirebaseAuth auth = FirebaseAuth.instance;
   static final FirebaseFirestore db = FirebaseFirestore.instance;
+
+  BuildContext? get context => null;
   // final db = FakeFirebaseFirestore();
 
   // final auth = MockFirebaseAuth(
@@ -38,7 +41,7 @@ class FirebaseAuthAPI {
     }
   }
 
-  // Future<String> signIn(String email, String password, String _error) async {
+  // Future<String> signIn(String email, String password) async {
   //   UserCredential credential;
   //   try {
   //     final credential = await auth.signInWithEmailAndPassword(
@@ -47,16 +50,14 @@ class FirebaseAuthAPI {
   //     if (e.code == 'user-not-found') {
   //       //possible to return something more useful
   //       //than just print an error message to improve UI/UX
-  //       print('No user found for that email.');
-  //       _error = "No user";
-  //       return _error;
+  //       //print('No user found for that email.');
+  //       return 'No user found for that email.';
   //     } else if (e.code == 'wrong-password') {
-  //       print('Wrong password provided for that user.');
-  //       _error = "Wrong password";
-  //       return _error;
+  //       //print('Wrong password provided for that user.');
+  //       return "Wrong password";
   //     }
   //   }
-  //   return _error;
+  //   return "tet";
   // }
 
   void signUp(

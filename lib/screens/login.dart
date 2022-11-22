@@ -15,8 +15,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    String _error = "";
     final formKey = GlobalKey<FormState>();
-    String _error = "error1";
+    //Future<String> _error;
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
@@ -52,19 +53,24 @@ class _LoginPageState extends State<LoginPage> {
           }
         });
 
+    // Future<String> getError() async {
+    //   _error = await context
+    //       .read<AuthProvider>()
+    //       .signIn(emailController.text, passwordController.text);
+    //   return _error;
+    // }
+
     final loginButton = Padding(
       key: const Key('loginButton'),
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
         onPressed: () {
-          // _error = context
-          //     .read<AuthProvider>()
-          //     .signIn(emailController.text, passwordController.text, _error);
           final isValidForm = formKey.currentState!.validate();
           if (isValidForm) {
             context
                 .read<AuthProvider>()
                 .signIn(emailController.text, passwordController.text);
+            //getError();
           }
         },
         child: const Text('Log In', style: TextStyle(color: Colors.white)),
@@ -73,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final signUpButton = Padding(
       key: const Key('signUpButton'),
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
         onPressed: () async {
           Navigator.of(context).push(
@@ -86,19 +92,20 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    Widget showAlert() {
-      return Container(
-        color: Colors.amberAccent,
-        width: double.infinity,
-        padding: EdgeInsets.all(8.0),
-        child: Row(children: <Widget>[
-          Icon(Icons.error_outline),
-          Expanded(
-            child: Text(_error),
-          )
-        ]),
-      );
-    }
+    // Widget showAlert() {
+    //   print(_error);
+    //   return Container(
+    //     color: Colors.amberAccent,
+    //     width: double.infinity,
+    //     padding: EdgeInsets.all(8.0),
+    //     child: Row(children: <Widget>[
+    //       Icon(Icons.error_outline),
+    //       Expanded(
+    //         child: Text(_error),
+    //       )
+    //     ]),
+    //   );
+    // }
 
     return Scaffold(
       backgroundColor: Colors.white,
