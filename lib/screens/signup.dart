@@ -21,11 +21,6 @@ class _SignupPageState extends State<SignupPage> {
     TextEditingController firstNameController = TextEditingController();
     TextEditingController lasttNameController = TextEditingController();
 
-    bool _validateEmail = false;
-    bool _validatePassword = false;
-    bool _validateFirstName = false;
-    bool _validateLastName = false;
-
     final email = TextFormField(
       controller: emailController,
       decoration: const InputDecoration(

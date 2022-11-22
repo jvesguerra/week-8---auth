@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
+import 'package:week7_networking_discussion/screens/login.dart';
 
 class FirebaseAuthAPI {
   static final FirebaseAuth auth = FirebaseAuth.instance;
@@ -36,6 +37,27 @@ class FirebaseAuthAPI {
       }
     }
   }
+
+  // Future<String> signIn(String email, String password, String _error) async {
+  //   UserCredential credential;
+  //   try {
+  //     final credential = await auth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       //possible to return something more useful
+  //       //than just print an error message to improve UI/UX
+  //       print('No user found for that email.');
+  //       _error = "No user";
+  //       return _error;
+  //     } else if (e.code == 'wrong-password') {
+  //       print('Wrong password provided for that user.');
+  //       _error = "Wrong password";
+  //       return _error;
+  //     }
+  //   }
+  //   return _error;
+  // }
 
   void signUp(
       String email, String password, String firstName, String lastName) async {

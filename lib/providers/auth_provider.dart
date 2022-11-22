@@ -28,6 +28,12 @@ class AuthProvider with ChangeNotifier {
     authService.signIn(email, password);
   }
 
+  // String signIn(String email, String password, String _error) {
+  //   authService.signIn(email, password, _error);
+  //   print(_error);
+  //   return _error;
+  // }
+
   void signOut() {
     authService.signOut();
   }
